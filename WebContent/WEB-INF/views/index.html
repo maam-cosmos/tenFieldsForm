@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/bootstrap.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/customcss/style.css}" />
+<script type="text/javascript" th:src="@{/resources/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/js/bootstrap.js}"></script>
+</head>
+<body>
+
+	<div class='container'>
+		<div class='row'>
+			<div class="col-md-12" style="margin-top: 50px; margin-bottom: 50px">
+				<div class="col-md-8 col-md-offset-2">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h4 style="margin: 0">Register Student</h4>
+						</div>
+						<div class="panel-body">
+							<form action="#" th:action="@{/result}" th:object="${student}" method="POST">
+
+								<div class="form-group col-md-6">
+									<label for="firstName">First Name</label> <input type="text" class="form-control" placeholder="First Name" th:field="*{firstName}" required>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="lastName">Last Name</label> <input type="text" class="form-control" id="lastName" placeholder="Last Name" name="lastName" required>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="email">Email</label> <input type="email" class="form-control" id="email" placeholder="someone@domain.com" name="email" required>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="password">Password</label> <input type="password" class="form-control" id="password" placeholder="Password" name="password" pattern=".{4,}" required title="4 characters minimum">
+								</div>
+								<div class="form-group col-md-6">
+									<label for="dateOfBirth">Date of Birth</label> <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" required>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="mobile">Mobile</label> <input type="text" class="form-control" id="mobile" placeholder="e.g. 017xxxxxxxx" name="mobile" pattern=".{11}" required title="Must be exactly 11 digits">
+								</div>
+
+								<div class="form-group col-md-6">
+									<label for="gender">Gender</label>
+									<div class="input-group">
+										<input type="radio" name="gender" id="male" value="male" checked> Male <input type="radio" name="gender" id="female" value="female"> Female
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label>Hobbies</label>
+									<div class="input-group">
+										<span th:each="hobby : ${hobbiesList}" style="margin-right: 2px"> <input style="margin-right: 2px" type="checkbox" th:field="*{hobbies}" th:value="${hobby}" th:text="${hobby}">
+										</span>
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="district">District</label> <select name="district" class="form-control" required>
+										<option value="">-- Select District --</option>
+										<option th:each="district : ${districtList}" th:field="*{district}" th:value="${district}" th:text="${district}"></option>
+									</select>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="language">Select Languages</label> <select name="languages" class="form-control" multiple="multiple" required>
+										<option th:each="language : ${languageList}" th:field="*{languages}" th:value="${language}" th:text="${language}"></option>
+
+									</select>
+								</div>
+								<div class="col-md-12">
+									<button type="submit" class="btn btn-success">Submit</button>
+									<button type="reset" class="btn btn-warning pull-right">Reset</button>
+								</div>
+							</form>
+						</div>
+						<div class="panel-footer"></div>
+					</div>
+
+					<!-- ******************** Table ************************ -->
+					<!-- ************** Table Not Complete ***************** -->
+
+					<div class='table-responsive' style="margin-top: 50px">
+					<h3 style="background-color: green; color: white; text-align: center; text-decoration: underline;">List of Users</h3>
+						<table class="table table-bordered table-striped table-hover table-condensed">
+							<tr>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Email</th>
+								<th>Date of Birth</th>
+								<th>Mobile</th>
+								<th>Gender</th>
+								<th>Hobbies</th>
+								<th>District</th>
+								<th>Languages</th>
+							</tr>
+							<tr th:each="student : ${studentsList}">
+								<td th:text=${student.firstName}></td>
+								<td th:text=${student.lastName}></td>
+								<td th:text=${student.email}></td>
+								<td th:text=${student.dateOfBirth}></td>
+								<td th:text=${student.mobile}></td>
+								<td th:text=${student.gender}></td>
+								<td th:text=${student.hobbies}></td>
+								<td th:text=${student.district}></td>
+								<td th:text=${student.languages}></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
